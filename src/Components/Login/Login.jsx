@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 
+
 const Login = () => {
-  const {signIn}=useContext(AuthContext);
+  const {signIn,handleGoogleSignIn,handleGithubSignIn}=useContext(AuthContext);
   const navigate=useNavigate();
   const location=useLocation();
   console.log(location);
@@ -78,6 +79,15 @@ const Login = () => {
 
           </form>
           <h3 className="text-center mb-3">Don't have an Account? <Link to='/register' className="text-red-600"> Register</Link></h3>
+        </div>
+
+        <h3>OR</h3>
+        <div >
+        <button onClick={handleGoogleSignIn} className="btn btn-outline btn-primary px-24">Sign in with Google</button>
+        </div>
+        <h3>OR</h3>
+        <div>
+          <button onClick={handleGithubSignIn} className="btn btn-outline btn-primary px-24">Sign in with Github</button>
         </div>
       </div>
     </div>

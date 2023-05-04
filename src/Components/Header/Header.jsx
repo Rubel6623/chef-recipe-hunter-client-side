@@ -44,11 +44,11 @@ const Header = () => {
           </Link>
         }
 
-        { user ?
-          <p className="mx-4">
-            <span>{user.email}</span>
-            <button onClick={handleLogOut} className="btn btn-xs ms-2">Sign Out</button>
-          </p>:
+        { user?
+          <div className="mx-4 flex ">
+            <img className="w-10 h-10 rounded-3xl my-1" src={user.photoURL} alt="" />
+            <button onClick={handleLogOut} className="btn btn-ghost normal-case text-xl">Sign Out</button>
+          </div>:
             <Link className="btn btn-ghost normal-case text-xl" to='/login'>Login</Link>
         }
        </div>

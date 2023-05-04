@@ -28,9 +28,9 @@ const Header = () => {
           Orders
         </Link>
 
-        <Link className="btn btn-ghost normal-case text-xl" to="/login">
+        {/* <Link className="btn btn-ghost normal-case text-xl" to="/login">
           Login
-        </Link>
+        </Link> */}
 
         <Link className="btn btn-ghost normal-case text-xl" to="/register">
           Register
@@ -44,12 +44,12 @@ const Header = () => {
           </Link>
         }
 
-        { user &&
+        { user ?
           <p className="mx-4">
             <span>{user.email}</span>
             <button onClick={handleLogOut} className="btn btn-xs ms-2">Sign Out</button>
-          </p>
-          //   <Link to='/login'>Login</Link>
+          </p>:
+            <Link className="btn btn-ghost normal-case text-xl" to='/login'>Login</Link>
         }
        </div>
     </div>

@@ -26,28 +26,12 @@ const AuthProvider = ({children}) => {
         return signOut(auth);
     }
 
-    const handleGoogleSignIn=()=>{
-        signInWithPopup(auth,provider)
-        .then(result=>{
-            const loggedUser=result.user;
-            setUser(loggedUser);
-            console.log(loggedUser);
-        })
-        .catch(error=>{
-            console.error(error);
-        })
+    const GoogleSignIn=()=>{
+        return signInWithPopup(auth,provider)
     }
 
-    const handleGithubSignIn=()=>{
-        signInWithPopup(auth,githubProvider)
-        .then(result=>{
-            const loggedUser=result.user;
-            setUser(loggedUser);
-        })
-        .catch(error=>{
-            console.error(error);
-        })
-
+    const GithubSignIn=()=>{
+        return signInWithPopup(auth,githubProvider)
     }
 
     useEffect(()=>{
@@ -66,8 +50,8 @@ const AuthProvider = ({children}) => {
         signIn,
         logOut,
         loading,
-        handleGoogleSignIn,
-        handleGithubSignIn,
+        GoogleSignIn,
+        GithubSignIn,
     }
 
     return (

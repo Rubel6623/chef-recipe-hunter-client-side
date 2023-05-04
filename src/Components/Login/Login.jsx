@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 
 
 const Login = () => {
-  const {signIn,handleGoogleSignIn,handleGithubSignIn}=useContext(AuthContext);
+  const [user,setUser]=useState(null);
+  const {signIn,GoogleSignIn,GithubSignIn}=useContext(AuthContext);
   const navigate=useNavigate();
   const location=useLocation();
   console.log(location);
@@ -29,6 +30,31 @@ const Login = () => {
     .catch(error=>{
       console.error(error)
     })
+  }
+
+  const handleGoogleSignIn=()=>{
+    GoogleSignIn()
+    .then(result=>{
+      const loggedUser=result.user;
+      console.log(loggedUser);
+      setUser(loggedUser);
+      navigate(from, {replace:true})
+    })
+    .catch(error=>{
+      console.error(error);
+    })
+  }
+
+  const handleGithubSignIn=()=>{
+    GithubSignIn()
+    .then(result=>{
+      const loggedUser=result.user;
+      setUser(loggedUser);
+      navigate(from,{replace:true})
+  })
+  .catch(error=>{
+      console.error(error);
+  })
   }
 
   return (

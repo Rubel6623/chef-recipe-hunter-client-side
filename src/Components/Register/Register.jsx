@@ -4,7 +4,12 @@ import { AuthContext } from '../Providers/AuthProvider';
 
 const Register = () => {
     const [error,setError]=useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const {createUser}=useContext(AuthContext);
+
+    const toggleShowPassword = () => {
+      setShowPassword(!showPassword);
+    };
 
     const handleRegister=(event)=>{
         event.preventDefault();
@@ -87,17 +92,25 @@ const Register = () => {
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
-
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name='password'
                 placeholder="password"
                 className="input input-bordered"
                 required
               />
+               <label>
+                <input
+                  type="checkbox"
+                  checked={showPassword}
+                  onChange={toggleShowPassword}
+                  className='mt-2'
+                />
+                Show Password
+              </label>
 
               <label className="label">
-                <span className="label-text">Confirm Password</span>
+                <span className="label-text mt-3">Confirm Password</span>
               </label>
 
               <input

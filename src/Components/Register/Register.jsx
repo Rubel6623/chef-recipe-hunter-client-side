@@ -8,22 +8,32 @@ const Register = () => {
 
     const handleRegister=(event)=>{
         event.preventDefault();
-
+        setError('');
         const form=event.target;
         const email=form.email.value;
         const name=form.name.value;
         const password=form.password.value;
         const confirm=form.confirm.value;
         console.log(name,email,password,confirm);
-
-        setError('');
-        if(password!==confirm){
+        if(!/(?=.*[A-Z])/.test(password)){
+          setError('Please add at least one Uppercase');
+          return;
+        }
+        else if(!/(?=.*[!@#$&*])/.test(password)){
+          setError('Please add a special character...');
+          return;
+        }
+        else if(password!==confirm){
             setError('Your Password did not match');
             return;
         }
         else if(password.length<6){
-            setError('Password must be 6 characters or longer')
-            return
+            setError('Password must be 6 characters or longer');
+            return;
+        }
+        else if(!/(?=.*[0-9])/.test(password)){
+          setError('Please add at least two numbers');
+          return;
         }
         createUser(email,password)
         .then(result=>{

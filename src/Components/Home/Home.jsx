@@ -1,6 +1,7 @@
 import React from "react";
 import "./Home.css";
 import ChefsCard from "../ChefsCard/ChefsCard";
+import { useParams } from "react-router-dom";
 
 const Home = () => {
   return (

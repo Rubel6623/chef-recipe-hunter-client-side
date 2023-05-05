@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react';
+import ChefInfo from '../ChefInfo/ChefInfo';
 
 const ChefsCard = () => {
-    const [chef,setChef]=useState([]);
+    const [chefs,setChefs]=useState([]);
 
     useEffect(()=>{
         fetch('http://localhost:5000/chefsData')
             .then(res=>res.json())
-            .then(data=>console.log(data))
+            .then(data=>setChefs(data))
             .catch(error=>console.error(error))
     },[])
 
     return (
         <div>
-            <h4>all chefs are here</h4>
+            <h4 className='text-center text-red-400 text-4xl font-semibold m-12 pt-4'>Chef's Corners🍳</h4>
+            <div className='grid md:grid-cols-3 gap-20 ms-28 mb-6'>
+            {
+                chefs.map(chef=><ChefInfo key={chef.id} chef={chef}></ChefInfo>)
+            }
+            </div>
         </div>
     );
 };

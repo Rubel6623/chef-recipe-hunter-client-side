@@ -9,6 +9,7 @@ import Register from "./Components/Register/Register.jsx";
 import Order from "./Components/Oder/Order";
 import AuthProvider from "./Components/Providers/AuthProvider";
 import PrivateRoute from "./Components/Routes/PrivateRoute";
+import Recipes from "./Components/Recipes/Recipes";
 
 const router = createBrowserRouter([
   {
@@ -31,8 +32,13 @@ const router = createBrowserRouter([
         path: "/register",
         element: <Register></Register>,
       },
-    ],
-  },
+      {
+        path:'/chef/:id',
+        element:<Recipes></Recipes>,
+        loader:({params})=>fetch(`http://localhost:5000/chefsData/${params.id}`)
+      }
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

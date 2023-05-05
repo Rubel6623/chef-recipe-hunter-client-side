@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
+import ActiveLink from "../ActiveLink/ActiveLink";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -38,7 +39,7 @@ const Header = () => {
       <div>
         {
           <Link className="btn btn-ghost normal-case text-xl" to="/blog">
-            Blog
+            Blogs
           </Link>
         }
 

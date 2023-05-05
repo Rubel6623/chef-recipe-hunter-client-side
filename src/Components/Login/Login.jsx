@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FaGithub, FaGoogle} from "react-icons/fa";
 import { AuthContext } from "../Providers/AuthProvider";
 
 
@@ -109,11 +110,11 @@ const Login = () => {
 
         <h3>OR</h3>
         <div >
-        <button onClick={handleGoogleSignIn} className="btn btn-outline btn-primary px-24">Sign in with Google</button>
+        <button onClick={handleGoogleSignIn} className="btn btn-outline btn-primary px-24"><FaGoogle className="me-2 text-xl text-green-600"></FaGoogle> Sign in with Google</button>
         </div>
         <h3>OR</h3>
         <div>
-          <button onClick={handleGithubSignIn} className="btn btn-outline btn-primary px-24">Sign in with Github</button>
+          <button onClick={handleGithubSignIn} className="btn btn-outline btn-primary px-24"><FaGithub className="me-2 text-xl text-green-600"></FaGithub> Sign in with Github</button>
         </div>
       </div>
     </div>

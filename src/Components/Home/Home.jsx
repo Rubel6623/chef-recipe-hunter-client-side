@@ -1,7 +1,6 @@
 import React from "react";
 import "./Home.css";
 import ChefsCard from "../ChefsCard/ChefsCard";
-import { useParams } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -65,6 +64,60 @@ const Home = () => {
 
       <div className="mt-6">
       <ChefsCard></ChefsCard>
+      </div>
+      <div>
+
+        <h3 className="text-center text-4xl font-semibold text-amber-600 mt-16 mb-3">Our Customer Says</h3>
+
+        <div className="carousel ms-12">
+
+  <div id="slide1" className="carousel-item relative w-full">
+    <div className="card lg:card-side shadow-xl m-0">
+  <figure><img src="https://culinasydney.com.au/wp-content/uploads/2020/02/18-12_mensenumfrage.jpg" alt="Album"/></figure>
+  <div className="card-body my-48">
+    <h2 className="card-title">Adam Smith</h2>
+    <p>We visited this place for breakfast and dinner. The place is very conveniently located (on the highway ) with ample parking space. The food at both the meals was tasty and definitely worth the price. Good quantity served per portion. Service as also good</p>
+  </div>
+</div>
+
+    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+      <a href="#slide4" className="btn btn-circle">❮</a> 
+      <a href="#slide2" className="btn btn-circle">❯</a>
+    </div>
+  </div> 
+
+  <div id="slide2" className="carousel-item relative w-full">
+    <div className="card lg:card-side shadow-xl m-0">
+  <figure><img src="https://restaurantengine.com/wp-content/uploads/2013/04/Restaurant-Customer-Loyalty.jpg" alt="Album"/></figure>
+  <div className="card-body my-48">
+    <h2 className="card-title">Jhon Dev!</h2>
+    <p className="">We visited this place for breakfast and dinner. The place is very conveniently located (on the highway ) with ample parking space. The food at both the meals was tasty and definitely worth the price. Good quantity served per portion. Service as also good</p>
+  </div>
+</div>
+
+    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+      <a href="#slide1" className="btn btn-circle">❮</a> 
+      <a href="#slide3" className="btn btn-circle">❯</a>
+    </div>
+  </div> 
+
+  <div id="slide3" className="carousel-item relative w-full">
+    <div className="card lg:card-side shadow-xl m-0">
+  <figure><img src="https://www.ocean-glassware.com/wp-content/uploads/2020/03/How-to-properly-handle-the-customers-complaint1.jpg" alt="Album"/></figure>
+  <div className="card-body my-48">
+    <h2 className="card-title">Jenifer </h2>
+    <p>We visited this place for breakfast and dinner. The place is very conveniently located (on the highway ) with ample parking space. The food at both the meals was tasty and definitely worth the price. Good quantity served per portion. Service as also good</p>
+  </div>
+</div>
+
+
+    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+      <a href="#slide2" className="btn btn-circle">❮</a> 
+      <a href="#slide4" className="btn btn-circle">❯</a>
+    </div>
+  </div> 
+</div>
+
       </div>
     </div>
   );

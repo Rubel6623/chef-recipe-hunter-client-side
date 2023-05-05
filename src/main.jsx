@@ -10,6 +10,7 @@ import Order from "./Components/Oder/Order";
 import AuthProvider from "./Components/Providers/AuthProvider";
 import PrivateRoute from "./Components/Routes/PrivateRoute";
 import Recipes from "./Components/Recipes/Recipes";
+import Blog from "./Components/Blog/Blog";
 
 const router = createBrowserRouter([
   {
@@ -33,8 +34,12 @@ const router = createBrowserRouter([
         element: <Register></Register>,
       },
       {
+        path:'/blog',
+        element:<Blog></Blog>
+      },
+      {
         path:'/chef/:id',
-        element:<Recipes></Recipes>,
+        element:<PrivateRoute><Recipes></Recipes></PrivateRoute>,
         loader:({params})=>fetch(`http://localhost:5000/chefsData/${params.id}`)
       }
     ]

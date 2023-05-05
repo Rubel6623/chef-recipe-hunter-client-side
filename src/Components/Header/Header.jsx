@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <div className="navbar bg-primary text-neutral-content flex justify-between ">
       <div>
-        <a className="btn btn-ghost normal-case text-xl">Auth Master</a>
+        <a className="btn btn-ghost normal-case text-xl">Chef Hut</a>
       </div>
 
       <div>
@@ -37,8 +37,8 @@ const Header = () => {
 
       <div>
         {
-          <Link className="btn btn-ghost normal-case text-xl" to="/profile">
-            Profile
+          <Link className="btn btn-ghost normal-case text-xl" to="/blog">
+            Blog
           </Link>
         }
 

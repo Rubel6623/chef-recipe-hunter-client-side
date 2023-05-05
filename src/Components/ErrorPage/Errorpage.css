@@ -1,0 +1,10 @@
+.error{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    background:  linear-gradient(90deg, rgba(126, 144, 254, 0.1) 0%, rgba(152, 115, 255, 0.1) 100%);
+    padding-top: 50%;
+    padding-bottom: 50%;
+  }

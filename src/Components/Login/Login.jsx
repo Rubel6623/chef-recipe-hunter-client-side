@@ -6,6 +6,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 
 const Login = () => {
   const [user,setUser]=useState(null);
+  const [error,setError]=useState('')
   const {signIn,GoogleSignIn,GithubSignIn}=useContext(AuthContext);
   const navigate=useNavigate();
   const location=useLocation();
@@ -15,6 +16,7 @@ const Login = () => {
 
   const handleLogin=(event)=>{
     event.preventDefault();
+    
 
     const form=event.target;
     const email=form.email.value;
@@ -30,6 +32,7 @@ const Login = () => {
     })
     .catch(error=>{
       console.error(error)
+      setError(error.message)
     })
   }
 
@@ -43,6 +46,7 @@ const Login = () => {
     })
     .catch(error=>{
       console.error(error);
+      setError(error.message)
     })
   }
 
@@ -55,6 +59,7 @@ const Login = () => {
   })
   .catch(error=>{
       console.error(error);
+      setError(error.message)
   })
   }
 
@@ -104,9 +109,11 @@ const Login = () => {
               <button className="btn btn-primary">Login</button>
             </div>
 
+        <p className="text-red-600 text-center">{error}</p>
           </form>
-          <h3 className="text-center mb-3">Don't have an Account? <Link to='/register' className="text-red-600"> Register</Link></h3>
+          <h3 className="text-center mb-4">Don't have an Account? <Link to='/register' className="text-red-600"> Register</Link></h3>
         </div>
+
 
         <h3>OR</h3>
         <div >

@@ -22,10 +22,10 @@ const Recipe = ({ recipes }) => {
 </div>
 
 
-      <div className="w-100 bg-base-100 shadow-2xl md:flex gap-12 mx-8">
+      <div className="w-100 bg-base-100 shadow-2xl md:grid md:grid-cols-3 gap-12 mx-8">
       {recipes.recipes.map((recipe) => (
         <div key={recipe.recipe_id}>
-          <div className="border-2 rounded-lg shadow-lg">
+          <div className="border-2 rounded-lg shadow-lg mb-6">
             <img
               className="w-full h-64 rounded-lg"
               src={recipe.image_url}

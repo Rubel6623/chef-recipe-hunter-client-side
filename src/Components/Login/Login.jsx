@@ -118,10 +118,10 @@ const Login = () => {
           </form>
           <h3 className="text-center mb-4">
             Don't have an Account?{" "}
-            <ActiveLi to="/register" className="text-red-600">
+            <Link to="/register" className="text-red-600">
               {" "}
               Register
-            </ActiveLi>
+            </Link>
           </h3>
         </div>
 

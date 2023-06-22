@@ -5,7 +5,7 @@ const ChefsCard = () => {
     const [chefs,setChefs]=useState([]);
 
     useEffect(()=>{
-        fetch('http://localhost:5000/chefsData')
+        fetch('https://chef-recipe-hunter-server-rubel6623.vercel.app/chefsData')
             .then(res=>res.json())
             .then(data=>setChefs(data))
             .catch(error=>console.error(error))

@@ -1,18 +1,21 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaGithub, FaGoogle } from "react-icons/fa";
+import { FaGithub, FaGoogle, FaEye, FaEyeSlash, FaSignInAlt } from "react-icons/fa";
 import { AuthContext } from "../Providers/AuthProvider";
 
 const Login = () => {
-  const [user, setUser] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
-  const { signIn, GoogleSignIn, GithubSignIn } = useContext(AuthContext);
+  const { signIn, GoogleSignIn, GithubSignIn, error, clearError } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
-
+  
   const from = location.state?.from?.pathname || "/";
+  
+  // Clear any auth errors when component mounts or unmounts
+  useEffect(() => {
+    clearError();
+    return () => clearError();
+  }, [clearError]);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -24,7 +27,6 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
 
     signIn(email, password)
       .then((result) => {
@@ -35,115 +37,123 @@ const Login = () => {
       })
       .catch((error) => {
         console.error(error);
-        setError(error.message);
+        // Error is now handled in AuthProvider
       });
   };
 
   const handleGoogleSignIn = () => {
     GoogleSignIn()
       .then((result) => {
-        const loggedUser = result.user;
-        console.log(loggedUser);
-        setUser(loggedUser);
         navigate(from, { replace: true });
       })
       .catch((error) => {
         console.error(error);
-        setError(error.message);
+        // Error is now handled in AuthProvider
       });
   };
 
   const handleGithubSignIn = () => {
     GithubSignIn()
       .then((result) => {
-        const loggedUser = result.user;
-        setUser(loggedUser);
         navigate(from, { replace: true });
       })
       .catch((error) => {
         console.error(error);
-        setError(error.message);
+        // Error is now handled in AuthProvider
       });
   };
 
   return (
-    <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content flex-col">
-        <h1 className="text-5xl font-bold">Login now!</h1>
-
-        <div className="card w-full max-w-sm shadow-2xl bg-base-100 mx-24">
-          <form onSubmit={handleLogin} className="card-body">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                name="email"
-                placeholder="email"
-                className="input input-bordered"
-                required
-              />
-            </div>
-
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-
-              <input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                placeholder="password"
-                className="input input-bordered"
-                required
-              />
-
-              <label>
+    <div className="bg-amber-50 min-h-screen py-16">
+      <div className="container mx-auto px-4">
+        <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="bg-amber-600 p-6 text-white text-center">
+            <h1 className="text-3xl font-bold flex items-center justify-center">
+              <FaSignInAlt className="mr-2" /> Login to Chef Hut
+            </h1>
+            <p className="mt-2 text-amber-100">Access your account to explore delicious recipes</p>
+          </div>
+          
+          <div className="p-6">
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text text-gray-700 font-medium">Email</span>
+                </label>
                 <input
-                  type="checkbox"
-                  checked={showPassword}
-                  onChange={toggleShowPassword}
-                  className="mt-3"
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  className="input input-bordered w-full bg-gray-50 focus:bg-white transition-colors"
+                  required
                 />
-                Show Password
-              </label>
+              </div>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text text-gray-700 font-medium">Password</span>
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Enter your password"
+                    className="input input-bordered w-full pr-10 bg-gray-50 focus:bg-white transition-colors"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={toggleShowPassword}
+                    className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-gray-700"
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                </div>
+                <label className="label">
+                  <span className="label-text-alt text-right text-blue-600 hover:underline cursor-pointer">
+                    Forgot password?
+                  </span>
+                </label>
+              </div>
+
+              {error && (
+                <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
+                  <p>{error}</p>
+                </div>
+              )}
+
+              <div className="form-control mt-6">
+                <button className="btn btn-primary bg-amber-600 hover:bg-amber-700 border-0">
+                  Login
+                </button>
+              </div>
+            </form>
+
+            <div className="divider my-6">OR</div>
+
+            <div className="space-y-3">
+              <button
+                onClick={handleGoogleSignIn}
+                className="btn btn-outline border-gray-300 hover:bg-gray-100 hover:border-gray-300 hover:text-current w-full text-gray-700"
+              >
+                <FaGoogle className="mr-2 text-xl text-red-500" /> Sign in with Google
+              </button>
+              
+              <button
+                onClick={handleGithubSignIn}
+                className="btn btn-outline border-gray-300 hover:bg-gray-100 hover:border-gray-300 hover:text-current w-full text-gray-700"
+              >
+                <FaGithub className="mr-2 text-xl text-gray-800" /> Sign in with Github
+              </button>
             </div>
 
-            <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
-            </div>
-
-            <p className="text-red-600 text-center">{error}</p>
-          </form>
-          <h3 className="text-center mb-4">
-            Don't have an Account?{" "}
-            <Link to="/register" className="text-red-600">
-              {" "}
-              Register
-            </Link>
-          </h3>
-        </div>
-
-        <h3>OR</h3>
-        <div>
-          <button
-            onClick={handleGoogleSignIn}
-            className="btn btn-outline btn-primary px-24"
-          >
-            <FaGoogle className="me-2 text-xl text-green-600"></FaGoogle> Sign
-            in with Google
-          </button>
-        </div>
-        <h3>OR</h3>
-        <div>
-          <button
-            onClick={handleGithubSignIn}
-            className="btn btn-outline btn-primary px-24"
-          >
-            <FaGithub className="me-2 text-xl text-green-600"></FaGithub> Sign
-            in with Github
-          </button>
+            <p className="text-center mt-6 text-gray-600">
+              Don't have an account?{" "}
+              <Link to="/register" className="text-amber-600 hover:underline font-medium">
+                Register
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>
